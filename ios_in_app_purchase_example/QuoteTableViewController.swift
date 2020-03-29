@@ -111,6 +111,15 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
                     print("Transaction failed due to error: \(error.localizedDescription)")
                 }
                 
+                //Restore
+            } else if transaction.transactionState == .restored {
+             
+                showPremiumQuote()
+                
+                //Restore Click했을 때 버튼 안보이게 처리
+                navigationItem.setRightBarButton(nil, animated: true)
+                
+                SKPaymentQueue.default().finishTransaction(transaction) //End transaction
             }
         }
         
@@ -129,12 +138,11 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
         return false
     }
     
-
-    
     @IBAction func restorePressed(_ sender: UIBarButtonItem) {
-           
+        
+        //유저가 앱을 다시 다운로드 했을 때, 이전 결제 정보를 다시 가져옴
+        SKPaymentQueue.default().restoreCompletedTransactions()
+        
     }
-
-
 
 }

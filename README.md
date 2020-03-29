@@ -45,39 +45,51 @@ in app purchase practice
 
 - delegate method from `SKPaymentTransactionObserver`
 
-        //Listener for Payment Event
+        //Listener for Payment Event, 구매한 것에 대해서 추적. Content를 더 보여주거나 안보여줌.
         func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-                
-                for transaction in transactions {
-                    if transaction.transactionState == .purchased {
-                        //Give user permission to access to premium service here
-                        showPremiumQuote()
-                        //보통 UserDefaults로 처리함
-                        UserDefaults.standard.set(true, forKey: productId)
-                        
-                        print("Transaction Successful")
-                        SKPaymentQueue.default().finishTransaction(transaction) //End transaction
-                    } else if transaction.transactionState == .failed {
-                        SKPaymentQueue.default().finishTransaction(transaction)
-                        
-                        if let error: Error = transaction.error {
-                            print("Transaction failed due to error: \(error.localizedDescription)")
-                        }
-                        
+            
+            for transaction in transactions {
+                if transaction.transactionState == .purchased {
+                    //Give user permission to access to premium service here
+                    showPremiumQuote()
+                    
+                    UserDefaults.standard.set(true, forKey: productId)
+                    
+                    print("Transaction Successful")
+                    SKPaymentQueue.default().finishTransaction(transaction) //End transaction
+                } else if transaction.transactionState == .failed {
+                    SKPaymentQueue.default().finishTransaction(transaction)
+                    
+                    if let error: Error = transaction.error {
+                        print("Transaction failed due to error: \(error.localizedDescription)")
                     }
+                    
+                    //Restore
+                } else if transaction.transactionState == .restored {
+                 
+                     showPremiumQuote()
+                     SKPaymentQueue.default().finishTransaction(transaction) //End transaction
                 }
-                
             }
+            
+        }
 
         func showPremiumQuote(){
-                quotesToShow.append(contentsOf: premiumQuotes)
-                tableView.reloadData()
+            quotesToShow.append(contentsOf: premiumQuotes)
+            tableView.reloadData()
         }
-            
+
         func isPurchased() -> Bool {
             let purchaseStatus: Bool = UserDefaults.standard.bool(forKey: productId)
             if purchaseStatus {
                 return true
             }
             return false
+        }
+
+        @IBAction func restorePressed(_ sender: UIBarButtonItem) {
+            
+            //유저가 앱을 다시 다운로드 했을 때, 이전 결제 정보를 다시 가져옴
+            SKPaymentQueue.default().restoreCompletedTransactions()
+            
         }
