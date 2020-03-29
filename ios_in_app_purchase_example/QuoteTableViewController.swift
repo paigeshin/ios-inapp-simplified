@@ -11,8 +11,6 @@ import StoreKit
 
 class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
 
-    
-    
     //App을 만들 때 내가 만들던 Product ID
     let productId: String = "paige.ios_PremiumQuotes"
     
@@ -39,22 +37,22 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
 
         SKPaymentQueue.default().add(self)
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        if isPurchased() {
+            showPremiumQuote()
+        }
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isPurchased() {
+            return quotesToShow.count
+        }
         return quotesToShow.count + 1
     }
 
@@ -65,6 +63,8 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
         if indexPath.row < quotesToShow.count {
             cell.textLabel?.text = quotesToShow[indexPath.row]
             cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.textColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+            cell.accessoryType = .none
         } else {
             cell.textLabel?.text = "Get More Quotes"
             cell.textLabel?.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
@@ -81,86 +81,60 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    //실제 구매
     func buyPremiumQuotes() {
         if SKPaymentQueue.canMakePayments() {
-            
             let paymentRequest: SKMutablePayment = SKMutablePayment()
             paymentRequest.productIdentifier = productId
             SKPaymentQueue.default().add(paymentRequest)
-            
         } else {
             print("User can't make payments")
         }
     }
     
-    //Listener for Payment Event
+    //Listener for Payment Event, 구매한 것에 대해서 추적. Content를 더 보여주거나 안보여줌.
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
         for transaction in transactions {
             if transaction.transactionState == .purchased {
+                //Give user permission to access to premium service here
+                showPremiumQuote()
+                
+                UserDefaults.standard.set(true, forKey: productId)
+                
                 print("Transaction Successful")
-                //Give user permission to access to premium service 
+                SKPaymentQueue.default().finishTransaction(transaction) //End transaction
             } else if transaction.transactionState == .failed {
-                print("Transaction Failed")
+                SKPaymentQueue.default().finishTransaction(transaction)
+                
+                if let error: Error = transaction.error {
+                    print("Transaction failed due to error: \(error.localizedDescription)")
+                }
+                
             }
         }
         
     }
     
+    func showPremiumQuote(){
+        quotesToShow.append(contentsOf: premiumQuotes)
+        tableView.reloadData()
+    }
+    
+    func isPurchased() -> Bool {
+        let purchaseStatus: Bool = UserDefaults.standard.bool(forKey: productId)
+        if purchaseStatus {
+            return true
+        }
+        return false
+    }
+    
+
+    
     @IBAction func restorePressed(_ sender: UIBarButtonItem) {
            
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    
-    
-    
-    
-   
 
 
 }

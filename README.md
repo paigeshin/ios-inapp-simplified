@@ -46,14 +46,38 @@ in app purchase practice
 - delegate method from `SKPaymentTransactionObserver`
 
         //Listener for Payment Event
-            func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
                 
                 for transaction in transactions {
                     if transaction.transactionState == .purchased {
+                        //Give user permission to access to premium service here
+                        showPremiumQuote()
+                        //보통 UserDefaults로 처리함
+                        UserDefaults.standard.set(true, forKey: productId)
+                        
                         print("Transaction Successful")
+                        SKPaymentQueue.default().finishTransaction(transaction) //End transaction
                     } else if transaction.transactionState == .failed {
-                        print("Transaction Failed")
+                        SKPaymentQueue.default().finishTransaction(transaction)
+                        
+                        if let error: Error = transaction.error {
+                            print("Transaction failed due to error: \(error.localizedDescription)")
+                        }
+                        
                     }
                 }
                 
             }
+
+        func showPremiumQuote(){
+                quotesToShow.append(contentsOf: premiumQuotes)
+                tableView.reloadData()
+        }
+            
+        func isPurchased() -> Bool {
+            let purchaseStatus: Bool = UserDefaults.standard.bool(forKey: productId)
+            if purchaseStatus {
+                return true
+            }
+            return false
+        }
