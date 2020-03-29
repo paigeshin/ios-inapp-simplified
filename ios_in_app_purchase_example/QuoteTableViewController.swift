@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import StoreKit
 
-class QuoteTableViewController: UITableViewController {
+class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
+
+    
+    
+    //App을 만들 때 내가 만들던 Product ID
+    let productId: String = "paige.ios_PremiumQuotes"
     
     var quotesToShow = [
         "Our greatest glory is not in never falling, but in rising every time we fall. — Confucius",
@@ -31,6 +37,8 @@ class QuoteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        SKPaymentQueue.default().add(self)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -74,6 +82,28 @@ class QuoteTableViewController: UITableViewController {
     }
     
     func buyPremiumQuotes() {
+        if SKPaymentQueue.canMakePayments() {
+            
+            let paymentRequest: SKMutablePayment = SKMutablePayment()
+            paymentRequest.productIdentifier = productId
+            SKPaymentQueue.default().add(paymentRequest)
+            
+        } else {
+            print("User can't make payments")
+        }
+    }
+    
+    //Listener for Payment Event
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            if transaction.transactionState == .purchased {
+                print("Transaction Successful")
+                //Give user permission to access to premium service 
+            } else if transaction.transactionState == .failed {
+                print("Transaction Failed")
+            }
+        }
         
     }
     
