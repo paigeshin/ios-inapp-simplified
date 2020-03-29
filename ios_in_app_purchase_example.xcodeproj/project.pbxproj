@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		28E33AB92430AC2D00969E14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E33AB82430AC2D00969E14 /* AppDelegate.swift */; };
 		28E33ABB2430AC2D00969E14 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E33ABA2430AC2D00969E14 /* SceneDelegate.swift */; };
-		28E33ABD2430AC2D00969E14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E33ABC2430AC2D00969E14 /* ViewController.swift */; };
 		28E33AC02430AC2D00969E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E33ABE2430AC2D00969E14 /* Main.storyboard */; };
 		28E33AC22430AC2E00969E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E33AC12430AC2E00969E14 /* Assets.xcassets */; };
 		28E33AC52430AC2E00969E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E33AC32430AC2E00969E14 /* LaunchScreen.storyboard */; };
 		28E33ACD2430ACAF00969E14 /* QuoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E33ACC2430ACAF00969E14 /* QuoteTableViewController.swift */; };
+		28E33AD02430B78F00969E14 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E33ACF2430B78F00969E14 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		28E33AB52430AC2D00969E14 /* ios_in_app_purchase_example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios_in_app_purchase_example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E33AB82430AC2D00969E14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28E33ABA2430AC2D00969E14 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		28E33ABC2430AC2D00969E14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28E33ABF2430AC2D00969E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28E33AC12430AC2E00969E14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28E33AC42430AC2E00969E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28E33AC62430AC2E00969E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E33ACC2430ACAF00969E14 /* QuoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewController.swift; sourceTree = "<group>"; };
+		28E33ACF2430B78F00969E14 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E33AD02430B78F00969E14 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +45,7 @@
 			children = (
 				28E33AB72430AC2D00969E14 /* ios_in_app_purchase_example */,
 				28E33AB62430AC2D00969E14 /* Products */,
+				28E33ACE2430B78F00969E14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,14 +62,21 @@
 			children = (
 				28E33AB82430AC2D00969E14 /* AppDelegate.swift */,
 				28E33ABA2430AC2D00969E14 /* SceneDelegate.swift */,
-				28E33ABC2430AC2D00969E14 /* ViewController.swift */,
+				28E33ACC2430ACAF00969E14 /* QuoteTableViewController.swift */,
 				28E33ABE2430AC2D00969E14 /* Main.storyboard */,
 				28E33AC12430AC2E00969E14 /* Assets.xcassets */,
 				28E33AC32430AC2E00969E14 /* LaunchScreen.storyboard */,
 				28E33AC62430AC2E00969E14 /* Info.plist */,
-				28E33ACC2430ACAF00969E14 /* QuoteTableViewController.swift */,
 			);
 			path = ios_in_app_purchase_example;
+			sourceTree = "<group>";
+		};
+		28E33ACE2430B78F00969E14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28E33ACF2430B78F00969E14 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +150,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28E33ABD2430AC2D00969E14 /* ViewController.swift in Sources */,
 				28E33AB92430AC2D00969E14 /* AppDelegate.swift in Sources */,
 				28E33ACD2430ACAF00969E14 /* QuoteTableViewController.swift in Sources */,
 				28E33ABB2430AC2D00969E14 /* SceneDelegate.swift in Sources */,
@@ -289,12 +297,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 35W7TZ9DUM;
 				INFOPLIST_FILE = ios_in_app_purchase_example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "any.ios-in-app-purchase-example";
+				PRODUCT_BUNDLE_IDENTIFIER = "paige.ios-in-app-purchase-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,12 +315,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 35W7TZ9DUM;
 				INFOPLIST_FILE = ios_in_app_purchase_example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "any.ios-in-app-purchase-example";
+				PRODUCT_BUNDLE_IDENTIFIER = "paige.ios-in-app-purchase-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

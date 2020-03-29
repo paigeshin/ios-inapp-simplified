@@ -42,23 +42,44 @@ class QuoteTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return quotesToShow.count + 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath)
+        
+        if indexPath.row < quotesToShow.count {
+            cell.textLabel?.text = quotesToShow[indexPath.row]
+            cell.textLabel?.numberOfLines = 0
+        } else {
+            cell.textLabel?.text = "Get More Quotes"
+            cell.textLabel?.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            cell.accessoryType = .disclosureIndicator //아이콘
+        }
+        
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == quotesToShow.count {
+            buyPremiumQuotes()
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func buyPremiumQuotes() {
+        
+    }
+    
+    @IBAction func restorePressed(_ sender: UIBarButtonItem) {
+           
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -109,9 +130,7 @@ class QuoteTableViewController: UITableViewController {
     
     
     
-    @IBAction func restorePressed(_ sender: UIBarButtonItem) {
-        
-    }
+   
 
 
 }

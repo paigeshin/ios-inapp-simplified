@@ -9,7 +9,7 @@
         <!-- InspoQuotes-->
         <scene sceneID="TF4-t2-tKS">
             <objects>
-                <tableViewController id="oRo-LO-13N" customClass="QuoteTableViewController" customModule="InspoQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oRo-LO-13N" customClass="QuoteTableViewController" customModule="ios_in_app_purchase_example" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YMX-SA-jhn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cP4-zs-zLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3932" y="6.746626686656672"/>
+            <point key="canvasLocation" x="2939" y="-56"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fdd-HO-o9n">
@@ -62,7 +62,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gti-Vh-9sE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1890" y="-33"/>
+            <point key="canvasLocation" x="2101" y="-56"/>
         </scene>
     </scenes>
 </document>
