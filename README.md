@@ -5,16 +5,16 @@ in app purchase practice
 
 
 - import `StoreKit`
-
+```swift
         import StoreKit
-
+```
 - product id
-
+```swift
         //App을 만들 때 내가 만들던 Product ID
         let productId: String = "paige.ios_PremiumQuotes"
-
+```
 - buy premium quote
-
+```swift
         func buyPremiumQuotes() {
                 if SKPaymentQueue.canMakePayments() {
                     
@@ -26,9 +26,9 @@ in app purchase practice
                     print("User can't make payments")
                 }
         }
-
+```
 - implement `SKPaymentTransactionObserver`  to detect if user succedeed in payment
-
+```swift
         class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
         
             override func viewDidLoad() {
@@ -42,9 +42,9 @@ in app purchase practice
           }
         
         }
-
+```
 - delegate method from `SKPaymentTransactionObserver`
-
+```swift
         //Listener for Payment Event, 구매한 것에 대해서 추적. Content를 더 보여주거나 안보여줌.
         func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
             
@@ -93,3 +93,4 @@ in app purchase practice
             SKPaymentQueue.default().restoreCompletedTransactions()
             
         }
+```
